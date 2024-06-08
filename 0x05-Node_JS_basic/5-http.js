@@ -6,7 +6,6 @@ const HOST = 'localhost';
 const app = http.createServer();
 const DB_FILE = process.argv.length > 2 ? process.argv[2] : '';
 
-
 const countStudents = (dataPath) => new Promise((resolve, reject) => {
   if (!dataPath) {
     reject(new Error('Cannot load the database'));
@@ -70,6 +69,7 @@ const SERVER_ROUTE_HANDLERS = [
       res.setHeader('Content-Length', responseText.length);
       res.statusCode = 200;
       res.write(Buffer.from(responseText));
+      res.end(); // Add this to end the response
     },
   },
   {
@@ -85,6 +85,7 @@ const SERVER_ROUTE_HANDLERS = [
           res.setHeader('Content-Length', responseText.length);
           res.statusCode = 200;
           res.write(Buffer.from(responseText));
+          res.end(); // Add this to end the response
         })
         .catch((err) => {
           responseParts.push(err instanceof Error ? err.message : err.toString());
@@ -93,6 +94,7 @@ const SERVER_ROUTE_HANDLERS = [
           res.setHeader('Content-Length', responseText.length);
           res.statusCode = 200;
           res.write(Buffer.from(responseText));
+          res.end(); // Add this to end the response
         });
     },
   },
